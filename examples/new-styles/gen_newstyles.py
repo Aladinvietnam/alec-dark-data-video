@@ -61,17 +61,123 @@ function flameAt(cx, cy, s, t, seedv){
   x.moveTo(0, -6); x.bezierCurveTo(4.5, 0, 5, 5, 3, 9); x.bezierCurveTo(1, 12, -3, 11, -4, 7); x.bezierCurveTo(-5, 2, -3, -2, 0, -6); x.fill();
   x.restore();
 }
+/* ---------- UI DESIGN LAYER KIT ---------- */
+const cvEl = document.getElementById('cv');
+function hexA(hex, a){ const n = parseInt(hex.slice(1), 16); return 'rgba(' + (n >> 16 & 255) + ',' + (n >> 8 & 255) + ',' + (n & 255) + ',' + a + ')'; }
+function mix(hex, hex2, f){ const a = parseInt(hex.slice(1), 16), b = parseInt(hex2.slice(1), 16); const r = Math.round((a >> 16 & 255) + ((b >> 16 & 255) - (a >> 16 & 255)) * f), g = Math.round((a >> 8 & 255) + ((b >> 8 & 255) - (a >> 8 & 255)) * f), bl = Math.round((a & 255) + ((b & 255) - (a & 255)) * f); return 'rgb(' + r + ',' + g + ',' + bl + ')'; }
+const GOLD_STOPS = [[0, '#FFF6D8'], [0.45, '#F5C542'], [0.55, '#C78F16'], [1, '#9A6B0E']];
+const WHITE_STOPS = [[0, '#FFFFFF'], [0.5, '#E8EDF5'], [1, '#A9B6C8']];
+const RED_STOPS = [[0, '#FFD9D2'], [0.45, '#FF5A48'], [0.55, '#D92338'], [1, '#8F1220']];
+function gradText(str, tx, ty, size, font, stops, align, alpha, glow){
+  x.save();
+  x.font = size + 'px ' + font; x.textAlign = align || 'left'; x.textBaseline = 'alphabetic';
+  const g = x.createLinearGradient(0, ty - size, 0, ty + size * 0.12);
+  stops.forEach(st => g.addColorStop(st[0], st[1]));
+  const a0 = alpha === undefined ? 1 : alpha;
+  if(glow){ x.shadowColor = glow; x.shadowBlur = size * 0.42; x.globalAlpha = a0 * 0.85; x.fillStyle = g; x.fillText(str, tx, ty); x.shadowBlur = 0; }
+  x.globalAlpha = a0; x.fillStyle = g; x.fillText(str, tx, ty);
+  x.lineWidth = 1; x.strokeStyle = 'rgba(0,0,0,0.30)'; x.strokeText(str, tx, ty);
+  x.restore();
+}
+function floorWash(cx, cy, r, hex, a){
+  const g = x.createRadialGradient(cx, cy, 0, cx, cy, r);
+  g.addColorStop(0, hexA(hex, a)); g.addColorStop(1, hexA(hex, 0));
+  x.save(); x.fillStyle = g; x.fillRect(cx - r, cy - r, r * 2, r * 2); x.restore();
+}
+function panelShadow(px, py, w, h, r){
+  const layers = [[18, 22, 0.10], [10, 12, 0.16], [4, 5, 0.22]];
+  x.save();
+  layers.forEach(L => { x.shadowColor = 'rgba(2,4,10,' + L[2] + ')'; x.shadowBlur = L[0]; x.shadowOffsetY = L[1]; x.fillStyle = 'rgba(10,14,24,1)'; rr(x, px, py, w, h, r); x.fill(); });
+  x.restore();
+}
+function glassPanel(px, py, w, h, r, tint){
+  panelShadow(px, py, w, h, r);
+  x.save();
+  x.fillStyle = tint || 'rgba(16,22,38,0.72)'; rr(x, px, py, w, h, r); x.fill();
+  x.fillStyle = 'rgba(255,255,255,0.05)'; rr(x, px, py, w, h, r); x.fill();
+  const bg2 = x.createLinearGradient(0, py, 0, py + h);
+  bg2.addColorStop(0, 'rgba(255,255,255,0.30)'); bg2.addColorStop(0.5, 'rgba(255,255,255,0.07)'); bg2.addColorStop(1, 'rgba(255,255,255,0.03)');
+  x.strokeStyle = bg2; x.lineWidth = 1; rr(x, px + 0.5, py + 0.5, w - 1, h - 1, r); x.stroke();
+  x.strokeStyle = 'rgba(255,255,255,0.13)';
+  x.beginPath(); x.moveTo(px + r, py + 1.5); x.lineTo(px + w - r, py + 1.5); x.stroke();
+  x.restore();
+}
+function ticks(px, py, w, h, color, a){
+  const L = 20;
+  x.save(); x.strokeStyle = color; x.globalAlpha = a === undefined ? 0.5 : a; x.lineWidth = 2;
+  x.beginPath();
+  x.moveTo(px, py + L); x.lineTo(px, py); x.lineTo(px + L, py);
+  x.moveTo(px + w - L, py); x.lineTo(px + w, py); x.lineTo(px + w, py + L);
+  x.moveTo(px + w, py + h - L); x.lineTo(px + w, py + h); x.lineTo(px + w - L, py + h);
+  x.moveTo(px + L, py + h); x.lineTo(px, py + h); x.lineTo(px, py + h - L);
+  x.stroke(); x.restore();
+}
+function srcChip(px, py, label, dotColor){
+  const w = tw(label, 17, 'PlexMono') + 54;
+  x.save();
+  x.fillStyle = 'rgba(12,17,29,0.80)'; rr(x, px, py, w, 38, 19); x.fill();
+  const cg = x.createLinearGradient(0, py, 0, py + 38);
+  cg.addColorStop(0, 'rgba(255,255,255,0.22)'); cg.addColorStop(1, 'rgba(255,255,255,0.05)');
+  x.strokeStyle = cg; x.lineWidth = 1; rr(x, px + 0.5, py + 0.5, w - 1, 37, 18); x.stroke();
+  x.fillStyle = dotColor || '#3ECF6E'; x.beginPath(); x.arc(px + 20, py + 19, 5, 0, Math.PI * 2); x.fill();
+  x.fillStyle = hexA(dotColor || '#3ECF6E', 0.3); x.beginPath(); x.arc(px + 20, py + 19, 11, 0, Math.PI * 2); x.fill();
+  text(label, px + 36, py + 25, 17, 'PlexMono', '#B9C2D0', 'left', 1, 1);
+  x.restore();
+}
+function bgStage(top, bot, blobs){
+  const g = x.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, top); g.addColorStop(1, bot);
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  (blobs || []).forEach(b => floorWash(b[0], b[1], b[2], b[3], b[4]));
+  x.save(); x.fillStyle = '#FFFFFF';
+  for(let gy = 48; gy < H; gy += 72) for(let gx2 = 48; gx2 < W; gx2 += 72){
+    const dx = (gx2 - W / 2) / (W / 2), dy = (gy - H / 2) / (H / 2);
+    const d = Math.sqrt(dx * dx + dy * dy);
+    if(d < 1.02){ x.globalAlpha = 0.055 * (1.02 - d); x.fillRect(gx2, gy, 2, 2); }
+  }
+  x.restore();
+}
+const grainTiles = [];
+for(let ti = 0; ti < 4; ti++){
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g2 = c.getContext('2d'); const img = g2.createImageData(256, 256);
+  for(let i = 0; i < img.data.length; i += 4){ const v = 128 + (Math.random() * 2 - 1) * 16; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 255; }
+  g2.putImageData(img, 0, 0); grainTiles.push(c);
+}
+const bloomC = document.createElement('canvas'); bloomC.width = 480; bloomC.height = 270;
+const SCENE_BLOOM = [0.22, 0.16, 0.14, 0.20, 0.20, 0.22, 0, 0.20, 0.16, 0.10, 0.20, 0.14, 0.20];
+function finishFrame(sceneIdx, lt){
+  const ba = SCENE_BLOOM[sceneIdx] || 0;
+  if(ba > 0){
+    const bx = bloomC.getContext('2d');
+    bx.globalCompositeOperation = 'copy';
+    try{ bx.filter = 'brightness(0.72) contrast(2.4) blur(3px)'; }catch(e){}
+    bx.drawImage(cvEl, 0, 0, 480, 270);
+    try{ bx.filter = 'none'; }catch(e){}
+    x.save(); x.globalCompositeOperation = 'lighter'; x.globalAlpha = ba;
+    x.drawImage(bloomC, 0, 0, W, H); x.restore();
+  }
+  x.save(); x.globalAlpha = 0.055; x.globalCompositeOperation = 'overlay';
+  x.fillStyle = x.createPattern(grainTiles[Math.floor(lt * 30) % 4], 'repeat');
+  x.fillRect(0, 0, W, H); x.restore();
+  x.save(); x.translate(W / 2, H / 2); x.scale(1, H / W); x.translate(-W / 2, -H / 2);
+  const vg = x.createRadialGradient(W / 2, H / 2, 430, W / 2, H / 2, 1200);
+  vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(0.68, 'rgba(0,0,0,0.10)'); vg.addColorStop(1, 'rgba(0,0,0,0.40)');
+  x.fillStyle = vg; x.fillRect(-420, -720, W + 840, H + 1440); x.restore();
+}
 /* ---------- 0 · BORDER FLOOD ---------- */
 function s_flood(lt){
-  x.fillStyle = '#0A0F1C'; x.fillRect(0, 0, W, H);
+  bgStage('#0B1326', '#04060D', [[1480, 190, 560, '#27407A', 0.20], [280, 880, 480, '#11404F', 0.15], [900, 560, 620, '#3A2A66', 0.10]]);
+  const floodG = x.createLinearGradient(0, 130, 0, 930);
+  floodG.addColorStop(0, '#F4B44E'); floodG.addColorStop(0.55, '#E79A2E'); floodG.addColorStop(1, '#C67A1E');
   const R = 6 + eo(fade(lt, 0.4, 4.8)) * 46;
   WORLD.forEach(P => {
     const d = Math.hypot(P.c[0] - 31, P.c[1] - 41);
     x.beginPath();
     P.p.forEach((pt, i) => { const q = wproj(pt[0], pt[1]); i ? x.lineTo(q[0], q[1]) : x.moveTo(q[0], q[1]); });
     x.closePath();
-    if(d < R){ x.fillStyle = 'rgba(232,160,60,0.85)'; x.fill(); }
-    else { x.fillStyle = '#182238'; x.fill(); }
+    if(d < R){ x.fillStyle = floodG; x.globalAlpha = 0.94; x.fill(); x.globalAlpha = 1; }
+    else { x.fillStyle = '#1A2742'; x.fill(); }
     x.strokeStyle = 'rgba(140,170,220,0.16)'; x.lineWidth = 1; x.stroke();
   });
   const caps = [[31,41,'CONSTANTINOPLE',16,-16,'left'],[23,40,'ATHENS',-16,6,'right'],[35,33,'DAMASCUS',16,6,'left'],[31,30,'CAIRO',0,32,'center'],[44,33,'BAGHDAD',16,-12,'left']];
@@ -84,16 +190,21 @@ function s_flood(lt){
       text(c[2], q[0] + c[3], q[1] + c[4], 19, 'BVPXBold', '#FFE1A0', c[5], 1, 1);
     }
   });
-  text('ONE COLOUR TAKES THE MAP', 64, 92, 40, 'BVPBlack', WHITE, 'left', 1, 1);
+  text('MAP HISTORY · TERRITORY BY YEAR', 66, 50, 19, 'PlexMono', '#C9A24A', 'left', 1, 2);
+  gradText('ONE COLOUR TAKES THE MAP', 64, 100, 40, 'BVPBlack', WHITE_STOPS, 'left', 1, null);
+  x.fillStyle = GOLD; x.fillRect(66, 118, 34, 4);
+  x.fillStyle = 'rgba(255,255,255,0.14)'; x.fillRect(104, 119.5, 420, 1.5);
   const year = 1400 + Math.floor(eo(fade(lt, 0.4, 4.8)) * 120 + Math.max(0, lt - 0.4) * 2);
-  text(String(Math.min(1520, year)), 1856, 1006, 120, 'BVPBlack', GOLD, 'right', 1, 0);
-  text('YEAR', 1856, 912, 24, 'BVPXBold', GREY, 'right', 1, 4);
+  floorWash(1690, 950, 340, '#E8B33C', 0.13);
+  gradText(String(Math.min(1520, year)), 1856, 1006, 120, 'BVPBlack', GOLD_STOPS, 'right', 1, '#B97F16');
+  text('YEAR', 1856, 880, 22, 'BVPXBold', GREY, 'right', 1, 4);
+  srcChip(64, 992, 'SOURCE: HISTORICAL ATLAS · SAMPLE', '#3ECF6E');
 }
 /* ---------- 1 · CHAT THREAD ---------- */
 function s_chat(lt){
-  const g = x.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, '#101623'); g.addColorStop(1, '#070A12'); x.fillStyle = g; x.fillRect(0, 0, W, H);
-  text('TOLD AS A CONVERSATION', 90, 300, 44, 'BVPBlack', WHITE, 'left', 1, 1);
+  bgStage('#0C1322', '#05070D', [[340, 260, 480, '#0F4256', 0.17], [1650, 900, 420, '#27356B', 0.13]]);
+  text('STORYTELLING · CHAT THREAD', 92, 240, 19, 'PlexMono', '#7FD4C1', 'left', 1, 2);
+  gradText('TOLD AS A CONVERSATION', 90, 302, 44, 'BVPBlack', WHITE_STOPS, 'left', 1, null);
   text('every bubble is a cliffhanger', 90, 356, 28, 'BVPSemi', GREY, 'left', 1, 0);
   text('the typing dots do the suspense', 90, 402, 28, 'BVPSemi', GREY, 'left', 1, 0);
   const px = 1180, pw = 560;
@@ -125,7 +236,11 @@ function s_chat(lt){
     const pop = eob(fade(lt, r.m.at, r.m.at + 0.3));
     const bx = r.m.side ? px + pw - 28 - r.w : px + 28;
     x.save(); x.translate(bx + r.w/2, r.y + 26); x.scale(Math.max(0.01, pop), Math.max(0.01, pop)); x.translate(-(bx + r.w/2), -(r.y + 26));
-    x.fillStyle = r.m.side ? '#005C4B' : '#1F2C34'; rr(x, bx, r.y, r.w, 52, 14); x.fill();
+    const bgc = x.createLinearGradient(0, r.y, 0, r.y + 52);
+    if(r.m.side){ bgc.addColorStop(0, '#00755F'); bgc.addColorStop(1, '#00473B'); }
+    else { bgc.addColorStop(0, '#27333D'); bgc.addColorStop(1, '#1A232B'); }
+    x.fillStyle = bgc; rr(x, bx, r.y, r.w, 52, 14); x.fill();
+    x.strokeStyle = 'rgba(255,255,255,0.09)'; x.lineWidth = 1; rr(x, bx + 0.5, r.y + 0.5, r.w - 1, 51, 13); x.stroke();
     text(r.m.txt, bx + 18, r.y + 34, 22, 'BVPSemi', r.m.hot ? '#FF8A7A' : '#E8EDEF', 'left', 1, 0);
     x.restore();
   });
@@ -144,13 +259,16 @@ function s_chat(lt){
 /* ---------- 2 · CASE FILE ---------- */
 function s_case(lt){
   x.fillStyle = '#0A0A0C'; x.fillRect(0, 0, W, H);
-  text('SHE VANISHED IN BROAD DAYLIGHT', 64, 96, 42, 'BVPBlack', WHITE, 'left', 1, 1);
+  gradText('SHE VANISHED IN BROAD DAYLIGHT', 64, 98, 42, 'BVPBlack', WHITE_STOPS, 'left', 1, null);
+  ticks(38, 38, W - 76, H - 76, '#FFFFFF', 0.26);
   text('HOOK LINE NEVER LEAVES THE TOP', 64, 140, 20, 'BVPXBold', RED, 'left', 1, 3);
   function photo(cx, cy, w, h, rot, kind, label){
     x.save(); x.translate(cx, cy); x.rotate(rot);
     const kb = 1 + 0.05 * fade(lt, 0, 5.5);
     x.scale(kb, kb);
+    x.shadowColor = 'rgba(0,0,0,0.5)'; x.shadowBlur = 22; x.shadowOffsetY = 12;
     x.fillStyle = '#E8E4DA'; x.fillRect(-w/2 - 10, -h/2 - 10, w + 20, h + 46);
+    x.shadowColor = 'transparent'; x.shadowBlur = 0; x.shadowOffsetY = 0;
     const gg = x.createLinearGradient(0, -h/2, 0, h/2);
     if(kind === 0){ gg.addColorStop(0, '#3A4356'); gg.addColorStop(1, '#141A26'); }
     if(kind === 1){ gg.addColorStop(0, '#2E3A2E'); gg.addColorStop(1, '#10160F'); }
@@ -209,12 +327,18 @@ function s_race(lt){
     const idx = RACE.indexOf(o.r); const target = 190 + rank * 118;
     raceY[idx] += (target - raceY[idx]) * 0.2;
     const y = raceY[idx]; const wdt = 120 + (o.v / 400) * 1380;
-    x.fillStyle = o.r.c; rr(x, 300, y, wdt, 74, 8); x.fill();
+    const bgc = x.createLinearGradient(0, y, 0, y + 74);
+    bgc.addColorStop(0, mix(o.r.c, '#FFFFFF', 0.30)); bgc.addColorStop(0.5, o.r.c); bgc.addColorStop(1, mix(o.r.c, '#000000', 0.20));
+    x.fillStyle = bgc; rr(x, 300, y, wdt, 74, 8); x.fill();
+    x.fillStyle = 'rgba(255,255,255,0.20)'; x.fillRect(308, y + 2, Math.max(0, wdt - 16), 2);
     text(o.r.n, 280, y + 50, 28, 'BVPXBold', WHITE, 'right', 1, 1);
+    x.save(); x.shadowColor = o.r.c; x.shadowBlur = 12;
     text('$' + Math.round(o.v) + 'B', 316 + wdt, y + 50, 30, 'BVPBlack', o.r.c, 'left', 1, 0);
+    x.restore();
   });
   const yr = 2007 + Math.round(p * 18);
-  text(String(yr), 1856, 1006, 110, 'BVPBlack', GOLD, 'right', 1, 0);
+  floorWash(1700, 950, 320, '#E8B33C', 0.12);
+  gradText(String(yr), 1856, 1006, 110, 'BVPBlack', GOLD_STOPS, 'right', 1, '#B97F16');
 }
 /* ---------- 4 · MONEY RIVER ---------- */
 function s_river(lt){
@@ -226,9 +350,14 @@ function s_river(lt){
     { n: 'PROFIT', share: 0.22, c: '#2FBF71' }
   ];
   const sx = 330, sy0 = 300, totalH = 470;
-  x.fillStyle = '#22314E'; rr(x, 90, sy0, 190, totalH, 12); x.fill();
+  panelShadow(90, sy0, 190, totalH, 12);
+  const srcG = x.createLinearGradient(0, sy0, 0, sy0 + totalH);
+  srcG.addColorStop(0, '#2C4066'); srcG.addColorStop(1, '#182642');
+  x.fillStyle = srcG; rr(x, 90, sy0, 190, totalH, 12); x.fill();
+  x.strokeStyle = 'rgba(255,255,255,0.14)'; x.lineWidth = 1; rr(x, 90.5, sy0 + 0.5, 189, totalH - 1, 12); x.stroke();
   text('REVENUE', 185, sy0 - 24, 24, 'BVPXBold', WHITE, 'center', 1, 2);
-  text('$412B', 185, sy0 + totalH/2 + 16, 44, 'BVPBlack', GOLD, 'center', 1, 0);
+  gradText('$412B', 185, sy0 + totalH/2 + 16, 44, 'BVPBlack', GOLD_STOPS, 'center', 1, '#B97F16');
+  srcChip(90, 992, 'SOURCE: COMPANY FILING · SAMPLE DATA', '#E8B33C');
   let acc = 0;
   flows.forEach((f, i) => {
     const h = f.share * totalH; const yTop = sy0 + acc; acc += h;
@@ -242,7 +371,9 @@ function s_river(lt){
       x.lineTo(1540, ty + th);
       x.bezierCurveTo(1290, ty + th, sx + 420, yTop + h, sx, yTop + h);
       x.closePath();
-      x.fillStyle = f.c; x.globalAlpha = 0.85; x.fill(); x.restore();
+      const bandG = x.createLinearGradient(0, Math.min(yTop, ty), 0, Math.max(yTop + h, ty + th));
+      bandG.addColorStop(0, mix(f.c, '#FFFFFF', 0.22)); bandG.addColorStop(0.5, f.c); bandG.addColorStop(1, mix(f.c, '#000000', 0.16));
+      x.fillStyle = bandG; x.globalAlpha = 0.92; x.fill(); x.restore();
       const trav = (lt * 0.24 + i * 0.37) % 1;
       const qx = sx + (1540 - sx) * trav;
       const qy = (yTop + h/2) + (ty + th/2 - (yTop + h/2)) * trav * trav;
@@ -263,7 +394,7 @@ function s_risefall(lt){
   text(fall ? 'ACT II · THE FALL' : 'ACT I · THE RISE', 64, 96, 34, 'BVPBlack', fall ? RED : GOLD, 'left', fade(lt, 0.1, 0.3) * (fall ? fade(lt, 3.4, 3.6) : 1), 2);
   const pts = [[140,880],[420,790],[700,640],[980,470],[1180,330],[1330,268],[1460,300],[1560,760],[1660,880],[1790,906]];
   const total = pts.length - 1; const prog = fade(lt, 0.3, 5.0) * total;
-  x.save(); x.strokeStyle = fall && prog > 6 ? RED : GOLD; x.lineWidth = 6; x.lineJoin = 'round'; x.shadowColor = x.strokeStyle; x.shadowBlur = 12;
+  x.save(); x.strokeStyle = fall && prog > 6 ? RED : GOLD; x.lineWidth = 6; x.lineJoin = 'round'; x.shadowColor = x.strokeStyle; x.shadowBlur = 22; x.globalAlpha = 0.55;
   x.beginPath();
   for(let i = 0; i <= Math.floor(prog); i++){ i ? x.lineTo(pts[i][0], pts[i][1]) : x.moveTo(pts[i][0], pts[i][1]); }
   const fr = prog - Math.floor(prog);
@@ -271,7 +402,7 @@ function s_risefall(lt){
     const a = pts[Math.floor(prog)], b = pts[Math.floor(prog) + 1];
     x.lineTo(a[0] + (b[0] - a[0]) * fr, a[1] + (b[1] - a[1]) * fr);
   }
-  x.stroke(); x.restore();
+  x.stroke(); x.globalAlpha = 1; x.shadowBlur = 10; x.stroke(); x.restore();
   const eras = [[420, 700, 'FOUNDED · 2007', 0.8], [980, 380, 'IPO · 2012', 1.9], [1330, 178, 'PEAK · $68B', 2.9], [1660, 700, 'BANKRUPT · 2024', 4.3]];
   eras.forEach(e => {
     if(lt > e[3]){
@@ -280,7 +411,7 @@ function s_risefall(lt){
     }
   });
   const val = prog < 5 ? Math.round(68 * (prog / 5)) : (prog < 6.4 ? 68 : Math.max(0, Math.round(68 - (prog - 6.4) * 60)));
-  text('$' + val + 'B', 1790, 120, 64, 'BVPBlack', fall ? RED : GOLD, 'right', 1, 0);
+  gradText('$' + val + 'B', 1790, 120, 64, 'BVPBlack', fall ? RED_STOPS : GOLD_STOPS, 'right', 1, fall ? '#A11624' : '#B97F16');
   text('MARKET VALUE', 1790, 66, 20, 'BVPXBold', GREY, 'right', 1, 3);
 }
 </script></body></html>"""

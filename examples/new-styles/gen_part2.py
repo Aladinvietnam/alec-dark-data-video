@@ -23,9 +23,13 @@ function s_collage(lt){
     if(lt < at) return;
     const p = fade(lt, at, at + 0.45); const sc = 0.6 + 0.4 * eob(p);
     x.save(); x.translate(cx, cy); x.rotate(rot); x.scale(sc, sc); x.globalAlpha = p;
+    x.shadowColor = 'rgba(59,45,18,0.38)'; x.shadowBlur = 18; x.shadowOffsetY = 9;
     x.fillStyle = '#F4EFE2'; x.fillRect(-w/2 - 9, -h/2 - 9, w + 18, h + 18);
+    x.shadowColor = 'transparent'; x.shadowBlur = 0; x.shadowOffsetY = 0;
     x.save(); x.beginPath(); x.rect(-w/2, -h/2, w, h); x.clip(); drawFn(w, h); x.restore();
     x.strokeStyle = '#1A1A1A'; x.lineWidth = 2; x.strokeRect(-w/2 - 9, -h/2 - 9, w + 18, h + 18);
+    x.fillStyle = 'rgba(238,231,203,0.82)'; x.fillRect(-46, -h/2 - 24, 92, 27);
+    x.strokeStyle = 'rgba(120,105,70,0.35)'; x.lineWidth = 1; x.strokeRect(-46, -h/2 - 24, 92, 27);
     x.restore();
     if(label && lt > at + 0.3){
       const full = label; const n = Math.floor(full.length * fade(lt, at + 0.3, at + 1.1));
@@ -74,21 +78,28 @@ function s_threshold(lt){
     const cx = 90 + (i % 5) * 148, cy = 200 + Math.floor(i / 5) * 148;
     const isC = order.indexOf(i) < called;
     const col = !isC ? '#232C3E' : (i % 3 === 0 ? '#C23B4E' : '#3E6FB0');
-    x.fillStyle = col; rr(x, cx, cy, 128, 128, 10); x.fill();
+    const tg = x.createLinearGradient(0, cy, 0, cy + 128);
+    tg.addColorStop(0, mix(col, '#FFFFFF', 0.16)); tg.addColorStop(1, mix(col, '#000000', 0.14));
+    x.fillStyle = tg; rr(x, cx, cy, 128, 128, 10); x.fill();
+    x.strokeStyle = 'rgba(255,255,255,0.09)'; x.lineWidth = 1; rr(x, cx + 0.5, cy + 0.5, 127, 127, 10); x.stroke();
     if(isC){ x.fillStyle = 'rgba(255,255,255,0.85)'; x.beginPath(); x.arc(cx + 64, cy + 64, 10, 0, Math.PI*2); x.fill(); }
   }
   const blue = Math.round(96 + fade(lt, 0.3, 4.6) * 142 + Math.sin(lt * 2.2) * 2);
   const red = Math.round(84 + fade(lt, 0.3, 4.6) * 96);
   const bx = 880, bw = 920;
   x.fillStyle = '#232C3E'; rr(x, bx, 210, bw, 64, 10); x.fill();
-  x.fillStyle = '#3E6FB0'; rr(x, bx, 210, bw * (blue / 538), 64, 10); x.fill();
-  x.fillStyle = '#C23B4E'; rr(x, bx + bw * (1 - red / 538), 210, bw * (red / 538), 64, 10); x.fill();
+  const bbG = x.createLinearGradient(0, 210, 0, 274);
+  bbG.addColorStop(0, mix('#3E6FB0', '#FFFFFF', 0.22)); bbG.addColorStop(1, mix('#3E6FB0', '#000000', 0.15));
+  x.fillStyle = bbG; rr(x, bx, 210, bw * (blue / 538), 64, 10); x.fill();
+  const rbG = x.createLinearGradient(0, 210, 0, 274);
+  rbG.addColorStop(0, mix('#C23B4E', '#FFFFFF', 0.22)); rbG.addColorStop(1, mix('#C23B4E', '#000000', 0.15));
+  x.fillStyle = rbG; rr(x, bx + bw * (1 - red / 538), 210, bw * (red / 538), 64, 10); x.fill();
   const lineX = bx + bw * (270 / 538);
   x.strokeStyle = GOLD; x.lineWidth = 4; x.setLineDash([10, 8]);
   x.beginPath(); x.moveTo(lineX, 180); x.lineTo(lineX, 320); x.stroke(); x.setLineDash([]);
   text('270 TO WIN', lineX, 168, 26, 'BVPXBold', GOLD, 'center', 1, 2);
-  text(String(blue), bx, 356, 74, 'BVPBlack', '#7FA8DC', 'left', 1, 0);
-  text(String(red), bx + bw, 356, 74, 'BVPBlack', '#E88A98', 'right', 1, 0);
+  gradText(String(blue), bx, 356, 74, 'BVPBlack', [[0, '#EAF3FF'], [0.5, '#7FA8DC'], [1, '#4A74AC']], 'left', 1, '#2A4A77');
+  gradText(String(red), bx + bw, 356, 74, 'BVPBlack', [[0, '#FFE9EC'], [0.5, '#E88A98'], [1, '#B04A5E']], 'right', 1, '#772A38');
   text('ELECTORAL VOTES COUNTED', bx, 396, 20, 'BVPXBold', GREY, 'left', 1, 2);
   // needle gauge
   const gx = 1330, gy = 830;
@@ -102,15 +113,19 @@ function s_threshold(lt){
   const ang = Math.PI * (1.15 + 0.57 * settle) + jit;
   x.strokeStyle = '#F4F6FA'; x.lineWidth = 8; x.lineCap = 'round';
   x.beginPath(); x.moveTo(gx, gy); x.lineTo(gx + Math.cos(ang) * 268, gy + Math.sin(ang) * 268); x.stroke();
+  x.fillStyle = 'rgba(255,255,255,0.22)'; x.beginPath(); x.arc(gx + Math.cos(ang) * 268, gy + Math.sin(ang) * 268, 13, 0, Math.PI * 2); x.fill();
+  x.fillStyle = '#FFFFFF'; x.beginPath(); x.arc(gx + Math.cos(ang) * 268, gy + Math.sin(ang) * 268, 5.5, 0, Math.PI * 2); x.fill();
   x.fillStyle = '#F4F6FA'; x.beginPath(); x.arc(gx, gy, 16, 0, Math.PI*2); x.fill();
   x.restore();
   text('ESTIMATE NEEDLE · STILL MOVING', gx, gy + 132, 22, 'BVPXBold', GREY, 'center', 1, 2);
   text('COUNTED IN BATCHES, NEVER SMOOTHLY', 90, 852, 26, 'BVPXBold', '#C9CDD6', 'left', 1, 1);
   text('THE JITTER IS THE SUSPENSE', 90, 900, 26, 'BVPXBold', '#C9CDD6', 'left', 1, 1);
+  srcChip(90, 962, 'SOURCE: WIRE CALLS · SAMPLE', '#E8B33C');
 }
 /* ---------- 8 · SLIDER EVIDENCE ---------- */
 function s_slider(lt){
   x.fillStyle = '#060708'; x.fillRect(0, 0, W, H);
+  ticks(38, 38, W - 76, H - 76, '#FFFFFF', 0.20);
   const blocks = [];
   seed = 23;
   for(let rI = 0; rI < 6; rI++) for(let cI = 0; cI < 11; cI++){
@@ -125,7 +140,10 @@ function s_slider(lt){
         x.strokeStyle = 'rgba(255,70,60,0.85)'; x.lineWidth = 2; x.strokeRect(b.bx - 3, b.by - 3, b.bw + 6, b.bh + 6);
       } else {
         const s = Math.floor(120 * b.shade);
-        x.fillStyle = 'rgb(' + (s + 26) + ',' + (s + 16) + ',' + (s - 4) + ')'; x.fillRect(b.bx, b.by, b.bw, b.bh);
+        const bgr = x.createLinearGradient(0, b.by, 0, b.by + b.bh);
+        bgr.addColorStop(0, 'rgb(' + (s + 46) + ',' + (s + 35) + ',' + (s + 13) + ')');
+        bgr.addColorStop(1, 'rgb(' + (s + 12) + ',' + (s + 4) + ',' + (s - 12) + ')');
+        x.fillStyle = bgr; x.fillRect(b.bx, b.by, b.bw, b.bh);
         x.fillStyle = 'rgba(255,220,150,0.5)';
         for(let wy = 0; wy < 3; wy++) for(let wx = 0; wx < 4; wx++){ if((wx * 7 + wy * 13 + b.bx) % 3) x.fillRect(b.bx + 12 + wx * 28, b.by + 12 + wy * 26, 12, 9); }
       }
@@ -134,14 +152,17 @@ function s_slider(lt){
   city(false);
   const wipeX = 130 + fade(lt, 0.5, 4.6) * 1660;
   x.save(); x.beginPath(); x.rect(0, 0, wipeX, H); x.clip(); city(true); x.restore();
-  x.fillStyle = '#FFFFFF'; x.fillRect(wipeX - 2, 120, 4, 860);
-  x.beginPath(); x.arc(wipeX, 550, 26, 0, Math.PI*2); x.fill();
-  text('‹ ›', wipeX, 560, 26, 'BVPBlack', '#111', 'center', 1, 0);
+  const wg2 = x.createLinearGradient(0, 120, 0, 980);
+  wg2.addColorStop(0, 'rgba(255,255,255,0.25)'); wg2.addColorStop(0.5, '#FFFFFF'); wg2.addColorStop(1, 'rgba(255,255,255,0.25)');
+  x.fillStyle = wg2; x.fillRect(wipeX - 2, 120, 4, 860);
+  x.fillStyle = 'rgba(14,18,26,0.88)'; x.beginPath(); x.arc(wipeX, 550, 26, 0, Math.PI*2); x.fill();
+  x.strokeStyle = 'rgba(255,255,255,0.8)'; x.lineWidth = 2; x.beginPath(); x.arc(wipeX, 550, 25, 0, Math.PI*2); x.stroke();
+  text('‹ ›', wipeX, 560, 26, 'BVPBlack', '#FFFFFF', 'center', 1, 0);
   text('28 OCT · AFTER', 90, 92, 28, 'BVPXBold', '#FF7A6A', 'left', 1, 2);
   text('12 OCT · BEFORE', 1830, 92, 28, 'BVPXBold', WHITE, 'right', 1, 2);
   const cnt = Math.round(224 * fade(lt, 0.5, 4.6));
-  text('BUILDINGS DESTROYED: ' + cnt + ' OF 670', 960, 1036, 30, 'BVPXBold', WHITE, 'center', 1, 2);
-  text('SOURCE: SATELLITE IMAGERY · SAMPLE SCENE', 90, 1036, 19, 'PlexMono', GREY, 'left', 1, 1);
+  gradText('BUILDINGS DESTROYED: ' + cnt + ' OF 670', 960, 1036, 30, 'BVPXBold', WHITE_STOPS, 'center', 1, null);
+  srcChip(90, 966, 'SOURCE: SATELLITE IMAGERY · SAMPLE SCENE', '#3ECF6E');
 }
 /* ---------- 9 · ANALOG HORROR ---------- */
 function s_analog(lt){
@@ -185,18 +206,26 @@ function s_alert(lt){
   x.fillStyle = '#000'; x.fillRect(0, 0, W, H);
   const hijack = lt > 3.2;
   if(hijack && lt < 3.45){ const cols = ['#C0C0C0','#C0C000','#00C0C0','#00C000','#C000C0','#C00000','#0000C0']; cols.forEach((c, i) => { x.fillStyle = c; x.fillRect(i * (W / 7), 0, W / 7, H); }); return; }
-  x.fillStyle = hijack ? '#8F0F1D' : '#C9A227'; x.fillRect(0, 0, W, 120);
+  const banG = x.createLinearGradient(0, 0, 0, 120);
+  if(hijack){ banG.addColorStop(0, '#B32336'); banG.addColorStop(1, '#7E1220'); }
+  else { banG.addColorStop(0, '#E7C34A'); banG.addColorStop(1, '#B98A1E'); }
+  x.fillStyle = banG; x.fillRect(0, 0, W, 120);
+  x.fillStyle = 'rgba(255,255,255,0.25)'; x.fillRect(0, 118, W, 2);
   text(hijack ? 'CIVIL DANGER WARNING' : 'EMERGENCY ALERT SYSTEM', 960, 80, 52, 'BVPBlack', hijack ? '#FFFFFF' : '#111111', 'center', 1, 3);
   const lines = hijack
     ? ['UPDATE — THE PREVIOUS MESSAGE', 'WAS SENT IN ERROR.', '', 'THE WARNING IS LIFTED.', 'GO OUTSIDE. LOOK AT THE SKY.']
     : ['A SEVERE EVENT HAS BEEN', 'CONFIRMED FOR THIS COUNTY.', '', 'REMAIN INDOORS.', 'DO NOT LOOK AT THE NIGHT SKY.'];
   lines.forEach((L, i) => {
     const at = hijack ? 3.5 + i * 0.16 : 0.4 + i * 0.4;
-    if(lt > at) text(L, 960, 300 + i * 74, 44, 'BVPXBold', i >= 3 ? '#FFD9D2' : WHITE, 'center', fade(lt, at, at + 0.2), 1);
+    if(lt > at){
+      if(hijack && i >= 3){ x.save(); x.shadowColor = '#FF2E4D'; x.shadowBlur = 16; text(L, 960, 300 + i * 74, 44, 'BVPXBold', '#FFD9D2', 'center', fade(lt, at, at + 0.2), 1); x.restore(); }
+      else text(L, 960, 300 + i * 74, 44, 'BVPXBold', i >= 3 ? '#FFD9D2' : WHITE, 'center', fade(lt, at, at + 0.2), 1);
+    }
   });
   text(hijack ? 'SOURCE UNVERIFIED · FICTIONAL SCENARIO' : 'NATIONAL WEATHER SERVICE · FICTIONAL SCENARIO', 960, 720, 21, 'PlexMono', GREY, 'center', 1, 2);
   const crawl = hijack ? '+++ WARNING LIFTED +++ GO OUTSIDE +++ WARNING LIFTED +++ GO OUTSIDE +++ ' : '+++ REMAIN INDOORS +++ DO NOT LOOK AT THE NIGHT SKY +++ REMAIN INDOORS +++ ';
   x.fillStyle = '#111'; x.fillRect(0, 950, W, 74);
+  x.fillStyle = 'rgba(255,255,255,0.16)'; x.fillRect(0, 950, W, 1.5);
   const off = (lt * 210) % 1400;
   text(crawl + crawl, -off, 1000, 34, 'PlexMono', hijack ? '#FF6A5A' : '#E8E8E8', 'left', 1, 1);
 }
@@ -205,6 +234,7 @@ function s_ghost(lt){
   const g = x.createLinearGradient(0, 0, 0, H);
   g.addColorStop(0, '#0A1410'); g.addColorStop(0.65, '#060A08'); g.addColorStop(1, '#030504');
   x.fillStyle = g; x.fillRect(0, 0, W, H);
+  floorWash(1620, 180, 210, '#E8E4C8', 0.10);
   x.save(); x.fillStyle = '#E8E4C8'; x.shadowColor = '#E8E4C8'; x.shadowBlur = 60;
   x.beginPath(); x.arc(1620, 180, 52, 0, Math.PI*2); x.fill(); x.restore();
   x.fillStyle = '#050807'; x.fillRect(0, 800, W, 280);
@@ -251,6 +281,9 @@ function s_ghost(lt){
     { txt: 'Cửa không khóa. Nhưng ngoài sân không một bóng người.', at: 2.2 },
     { txt: 'Chỉ có cửa sổ nhà đối diện… vừa sáng đèn.', at: 4.2 }
   ];
+  const tb = x.createLinearGradient(300, 0, 1620, 0);
+  tb.addColorStop(0, 'rgba(0,0,0,0)'); tb.addColorStop(0.5, 'rgba(0,0,0,0.42)'); tb.addColorStop(1, 'rgba(0,0,0,0)');
+  x.fillStyle = tb; x.fillRect(300, 852, 1320, 196);
   story.forEach((L, i) => {
     if(lt < L.at) return;
     const n = Math.floor(L.txt.length * fade(lt, L.at, L.at + 1.1));
@@ -272,7 +305,10 @@ function s_candles(lt){
   x.fillStyle = ag; x.fillRect(0, 0, W, H);
   pos.forEach((p, k) => {
     const dead = lt >= dieAt(k);
-    x.fillStyle = '#CFC4A8'; rr(x, p[0] - 17, p[1], 34, 74, 6); x.fill();
+    if(lt < dieAt(k)) floorWash(p[0], p[1] + 80, 58, '#FFAA50', 0.12);
+    const cg2 = x.createLinearGradient(0, p[1], 0, p[1] + 74);
+    cg2.addColorStop(0, '#E7DFC8'); cg2.addColorStop(1, '#A99B78');
+    x.fillStyle = cg2; rr(x, p[0] - 17, p[1], 34, 74, 6); x.fill();
     x.fillStyle = '#A89A7C'; x.fillRect(p[0] - 17, p[1], 34, 10);
     if(!dead){
       const hg = x.createRadialGradient(p[0], p[1] - 18, 0, p[0], p[1] - 18, 64);
@@ -290,7 +326,7 @@ function s_candles(lt){
       }
     }
   });
-  text('MỖI NGỌN NẾN, MỘT CÁI TÊN', 960, 104, 34, 'BVPXBold', '#D9CFB8', 'center', 1, 3);
+  gradText('MỖI NGỌN NẾN, MỘT CÁI TÊN', 960, 104, 34, 'BVPXBold', [[0, '#FFF3D6'], [0.55, '#D9CFB8'], [1, '#978A6C']], 'center', 1, null);
   text('CÒN LẠI ' + litCount + ' / 24 NGỌN', 960, 1006, 30, 'BVPXBold', litCount <= 6 ? '#FF8A7A' : '#B9AE94', 'center', 1, 3);
 }
 /* ---------- REGISTRY + REEL ---------- */
@@ -313,18 +349,21 @@ const SEGD = 5.5;
 window.renderScene = function(i, lt){
   x.clearRect(0, 0, W, H);
   SEGS[i].fn(lt);
+  finishFrame(i, lt);
 };
 window.render = function(t){
   const i = Math.min(SEGS.length - 1, Math.floor(t / SEGD));
   const lt = t - i * SEGD;
   x.clearRect(0, 0, W, H);
   SEGS[i].fn(lt);
+  finishFrame(i, lt);
   const chip = 'STYLE ' + String(i + 1).padStart(2, '0') + ' · ' + SEGS[i].name;
-  const cw = tw(chip, 21, 'BVPXBold') + 40;
-  const chipY = i === 10 ? 856 : 972;
-  x.fillStyle = 'rgba(6,8,14,0.88)'; rr(x, 1872 - cw, chipY, cw, 46, 23); x.fill();
-  x.strokeStyle = GOLD; x.lineWidth = 1.6; rr(x, 1872 - cw, chipY, cw, 46, 23); x.stroke();
-  text(chip, 1872 - cw + 20, chipY + 30, 21, 'BVPXBold', GOLD, 'left', 1, 1);
+  const cw = tw(chip, 21, 'BVPXBold') + 58;
+  const chipY = i === 10 ? 856 : (i === 0 || i === 3) ? 44 : 972;
+  glassPanel(1872 - cw, chipY, cw, 46, 23, 'rgba(10,13,22,0.82)');
+  x.fillStyle = GOLD; x.beginPath(); x.arc(1872 - cw + 22, chipY + 23, 5, 0, Math.PI * 2); x.fill();
+  x.fillStyle = 'rgba(232,179,60,0.28)'; x.beginPath(); x.arc(1872 - cw + 22, chipY + 23, 11, 0, Math.PI * 2); x.fill();
+  text(chip, 1872 - cw + 36, chipY + 30, 21, 'BVPXBold', GOLD, 'left', 1, 1);
   text(SEGS[i].genre, 48, 1046, 19, 'BVPXBold', 'rgba(230,235,245,0.55)', 'left', 1, 2);
   const fin = fade(lt, 0, 0.3), fout = fade(lt, SEGD - 0.3, SEGD);
   const black = Math.max(1 - fin, fout);

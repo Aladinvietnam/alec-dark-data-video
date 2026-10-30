@@ -104,6 +104,28 @@ Researched on 30 October 2026 at the user request and written up in [the genre s
 
 - In a long form video, place generated illustration images inside framed panels beside the data plane, one panel per beat with a caption naming the place or subject, and mark every panel with a small illustration tag so an illustration is never presented as a real photo.
 
+## Apply the UI design layer
+
+Added on 30 October 2026 after the user judged the demo graphics flat and plain and asked for UI design study online and on GitHub. The full spec with sources lives in [the UI design layer notes](references/ui-design-layer.md). These rules bind every template.
+
+- Build the background as a stack in draw order, a vertical near black wash that is never pure black, three or four analogous aurora blobs at 0.10 to 0.22 alpha with the brightest area behind the hero element, a grid or dot field faded toward the edges inside the plot area only, the data, film grain from pre-rendered tiles at 3 to 8 percent in overlay blend, and an elliptical vignette darkening the corners to 0.35 to 0.5.
+
+- Earn depth from lightness steps before hue, page near 5 percent lightness, chart field 8 to 9, panels 11 to 13, a raised verdict card near 15, with hairlines between zones preferred over shadow gaps.
+
+- Draw every panel as glass, a fill of white at 4 to 10 percent alpha or a dark tint, a 1 px gradient border on a half pixel offset running from white near 30 percent at the top to near 5 percent at the bottom, an inner top highlight line, a tinted perimeter stroke, and black or navy shadows only in layered stacks, baked into sprites whenever the panel is static.
+
+- Give exactly one element per frame the full hero light, a floor wash in its own colour at 8 to 14 percent alpha drawn before it, a glow stack of a hot near white core, a halo at 0.35 to 0.5 times the font size and a bloom at 1 to 1.5 times, and a gradient fill across the glyphs with a hard mid stop pair so the number reads as foil rather than flat paint.
+
+- Lock the type system, hero number 120 to 220 px at least four times its label, kickers uppercase with 0.08 to 0.14 em tracking, source lines uppercase and muted at 17 to 20 px, tabular or mono numerals for every counter, units at 35 to 45 percent of the hero size and half brightness, and one display family plus one mono family per video.
+
+- Keep surfaces desaturated on a fixed neutral ramp and let only the data carry saturation, with one accent owning the scene on an alpha ladder of washes near 12 percent, halos near 30, borders near 70 and the data itself at 100.
+
+- Fit the frame furniture, corner ticks on the main panel, a source chip in a fixed corner naming the source and the status of the number, status dots with soft halos, and a mono timestamp or counter, at most four furniture elements per frame and never fake detail.
+
+- Move with expensive curves, easeOutExpo for entrances over 300 to 600 ms, easeInOutQuart for camera moves, one small overshoot landing per scene on the verdict element, exits at about three quarters of the entrance duration, and siblings staggered by 40 to 80 ms.
+
+- Bake everything static once in the render pipeline, background plates, panel shadows and glow sprites, and never pay live shadowBlur across a full video when a stamped sprite gives the same frame.
+
 ## Animate the data itself
 
 - Treat the named templates as a vocabulary of effects rather than fixed cages, because a real video usually combines several effects inside one story instead of using one effect alone.

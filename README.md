@@ -144,6 +144,7 @@ Trừ Chart Duel và Investigation là khung thật từ video đã sản xuất
 - Một video = một khẳng định + một con số chính + 3 đến 7 nhãn phụ.
 - Dữ liệu phải tự chuyển động: số đếm, cột mọc, đường rơi, nhãn hiện theo thứ tự. Cấm gọi ảnh tĩnh zoom chậm là animation.
 - Bố cục theo vùng cố định, đo bề rộng chữ trong code để không bao giờ trùng nhau.
+- **Lớp thiết kế UI** (bổ sung 30/10/2026 sau khi bản demo bị chê phẳng): nền là một chồng lớp có ánh sáng (wash gần đen, aurora alpha thấp, lưới mờ, hạt nhiễu phim, vignette), panel kính với viền gradient 1px và bóng đổ nhiều lớp nướng sẵn, đúng một phần tử mỗi khung được phát sáng đầy đủ với chữ gradient kiểu lá kim loại, hệ chữ khoá cứng theo thang bậc, bề mặt khử bão hoà và chỉ dữ liệu mới rực màu. Thông số đầy đủ trong [references/ui-design-layer.md](references/ui-design-layer.md).
 - Có giọng đọc một người khớp từng pha hình, phụ đề theo đoạn; nhạc nền sáng tác riêng (hợp âm, bass, kick, arpeggio) với riser và impact đúng khoảnh khắc chốt.
 - Thời lượng 8–28 giây cho bản dữ liệu thuần; tới khoảng 36 giây khi có giọng đọc và pha điều tra.
 
@@ -154,6 +155,7 @@ SKILL.md                              # Tài liệu skill đầy đủ (quy trì
 skill.yaml                            # Khai báo để agent nhận diện và nạp skill
 references/alec-reference-videos.md   # Ghi chú 8 video tham chiếu kèm link gốc
 references/genre-styles-research.md   # Nghiên cứu 30/10/2026: các định dạng kể truyện, kinh tế, tin tức, truyện ma
+references/ui-design-layer.md         # Lớp thiết kế UI: thông số glass, glow, typography, màu và chuyển động học từ GitHub và các design system lớn
 examples/binance-hack/                # Ví dụ hoàn chỉnh: vụ hack Binance 29/10/2026
 examples/chip-route-long/             # Ví dụ bản dài 68 giây: The Chip Route (hook + panel ảnh + SFX)
 examples/new-styles/                  # Mã sản xuất reel 13 phong cách thể loại mới (ảnh tĩnh + reel 71,5 giây)
