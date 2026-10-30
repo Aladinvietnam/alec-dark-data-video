@@ -16,6 +16,26 @@ Skill được đúc kết từ 8 video tham chiếu của @ItsRealAlec (ghi ch�
 
 Có thêm một pha tuỳ chọn **Investigation** (phân tích nguyên nhân kiểu điều tra): bảng bằng chứng phủ lên biểu đồ đã làm mờ, các phát hiện hiện lần lượt theo dòng thời gian đánh số, mỗi phát hiện ghi rõ nguồn và đánh dấu “nghi vấn, chưa xác nhận” khi nguyên nhân chưa được khẳng định.
 
+## Thư viện phong cách
+
+**Map Tour** — bản đồ chấm sáng, tuyến đường vàng vẽ theo từng chặng, số tổng chốt ở góc:
+
+![Map Tour](docs/styles/map-tour.png)
+
+**Chart Duel** — hai cột đối đầu, con số chính khổng lồ, huy hiệu phán quyết (ảnh thật từ ví dụ Binance):
+
+![Chart Duel](docs/styles/chart-duel.png)
+
+**Count and Board** — bộ đếm tăng theo từng thẻ, chốt bằng bảng tổng kết:
+
+![Count and Board](docs/styles/count-and-board.png)
+
+**Investigation** — pha phân tích nguyên nhân: bảng bằng chứng phủ lên biểu đồ đã làm mờ (ảnh thật từ ví dụ Binance):
+
+![Investigation](docs/styles/investigation.png)
+
+Hai ảnh Map Tour và Count and Board dùng số liệu mẫu để minh họa phong cách (có gắn nhãn “Style demo · Sample data” ngay trong ảnh). Thư viện này sẽ được bổ sung thêm phong cách mới theo thời gian.
+
 ## Nguyên tắc cốt lõi
 
 - **Kiểm chứng mọi con số từ nguồn gốc trước khi vẽ.** Mục nào không có nguồn thì bỏ và nói rõ lý do. Không trình bày kế hoạch được báo cáo như thoả thuận đã ký, không trình bày ước tính như số đo thật.
