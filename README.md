@@ -6,13 +6,18 @@ Một **skill** (bộ hướng dẫn quy trình) giúp AI agent dựng các vide
 
 Skill được đúc kết từ 8 video tham chiếu của @ItsRealAlec (ghi chú chi tiết từng video trong [references/alec-reference-videos.md](references/alec-reference-videos.md)) và tinh chỉnh qua thực tế sản xuất.
 
-## Ba mẫu chính
+## Các mẫu phong cách
 
 | Mẫu | Khi nào dùng |
 |---|---|
 | **Map Tour** | Câu chuyện di chuyển qua nhiều địa điểm, mỗi điểm dừng thêm một nhãn và một con số |
 | **Chart Duel** | So sánh độ lớn, tăng hoặc sụp đổ: một cột hoặc đường phải thắng hoặc thua rõ ràng trước một mốc chuẩn đã biết |
 | **Count and Board** | Nhiều quốc gia hoặc chủ thể cùng làm một việc: bộ đếm tăng dần và chốt bằng bảng tổng kết toàn màn hình |
+| **Target Lock** | Cả câu chuyện nằm ở một điểm nóng duy nhất: bản đồ phóng to vào eo biển, biên giới hoặc cơ sở, vòng ngắm khoá mục tiêu và một con số đỏ khổng lồ |
+| **Evidence Collage** | Một khung hình chứa biểu đồ chính, sơ đồ sở hữu hoặc dòng tiền và nhiều biểu đồ rơi nhỏ, chốt bằng tem phán quyết đỏ |
+| **Screen Grid** | Câu chuyện về cảnh báo hoặc phát sóng tới mọi người: mở bằng lưới màn hình phát sáng, xanh ngọc làm màu chủ đạo, chốt bằng bộ đếm độ phủ |
+| **Arc and Card** | Tiền hoặc hàng chỉ di chuyển giữa đúng hai nơi: một cung vàng duy nhất, phóng vào điểm đến và hạ một thẻ nắm giữ lớn tại đó |
+| **Speech Clip** | Một phát biểu thật là trung tâm: người nói trên nền bản đồ tối, phụ đề luôn hiện (chỉ dùng khi có clip được duyệt) |
 
 Có thêm một pha tuỳ chọn **Investigation** (phân tích nguyên nhân kiểu điều tra): bảng bằng chứng phủ lên biểu đồ đã làm mờ, các phát hiện hiện lần lượt theo dòng thời gian đánh số, mỗi phát hiện ghi rõ nguồn và đánh dấu “nghi vấn, chưa xác nhận” khi nguyên nhân chưa được khẳng định.
 
@@ -34,7 +39,27 @@ Có thêm một pha tuỳ chọn **Investigation** (phân tích nguyên nhân ki
 
 ![Investigation](docs/styles/investigation.png)
 
-Hai ảnh Map Tour và Count and Board dùng số liệu mẫu để minh họa phong cách (có gắn nhãn “Style demo · Sample data” ngay trong ảnh). Thư viện này sẽ được bổ sung thêm phong cách mới theo thời gian.
+**Target Lock** — phóng to một điểm nóng, vòng ngắm đỏ khoá mục tiêu, con số tấn công đỏ khổng lồ:
+
+![Target Lock](docs/styles/target-lock.png)
+
+**Evidence Collage** — biểu đồ chính, sơ đồ sở hữu và 3 biểu đồ rơi trong một khung, tem SANCTIONED đóng chốt:
+
+![Evidence Collage](docs/styles/evidence-collage.png)
+
+**Screen Grid** — lưới màn hình cảnh báo xanh ngọc, bộ đếm độ phủ 50 bang:
+
+![Screen Grid](docs/styles/screen-grid.png)
+
+**Arc and Card** — một cung vàng nối hai điểm, thẻ nắm giữ lớn hạ tại điểm đến:
+
+![Arc and Card](docs/styles/arc-and-card.png)
+
+**Speech Clip** — clip phát biểu thật trên nền bản đồ, phụ đề hiệnตลอด (khung demo, không dùng hình người thật):
+
+![Speech Clip](docs/styles/speech-clip.png)
+
+Trừ Chart Duel và Investigation là khung thật từ video đã sản xuất, các ảnh còn lại dùng số liệu mẫu để minh họa phong cách (có gắn nhãn “Style demo · Sample data” ngay trong ảnh). Thư viện này sẽ được bổ sung thêm phong cách mới theo thời gian.
 
 ## Nguyên tắc cốt lõi
 

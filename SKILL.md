@@ -16,6 +16,14 @@
 
 - Pick the count and board when several countries or actors do the same thing and a rising counter plus a closing summary board gives the payoff.
 
+- Pick the target lock when the whole story sits in one hotspot, and zoom the map into that strait, border or facility while a route, a target ring and one very large red count carry the danger.
+
+- Pick the evidence collage when one frame must hold a main chart beside an ownership or flow diagram and several small falling charts, and land a red verdict stamp over the sanctioned side at the end.
+
+- Pick the screen grid when the story is about an alert or a broadcast reaching everyone, and open on a grid of glowing screens with teal as the lead colour before the coverage counter lands.
+
+- Pick the arc and card when money or goods move between exactly two places, and draw one gold arc, zoom into the destination and land one large holding card there.
+
 - Use a real speech clip with a map behind it only when the user supplies or approves that exact clip and its subtitles.
 
 ## Verify and distill the data
