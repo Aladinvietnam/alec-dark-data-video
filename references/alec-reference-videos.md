@@ -20,6 +20,10 @@ Source account is ItsRealAlec on X. All eight references were watched in the bro
 
 - Video 8, 10 seconds, speech clip variant. A real political speech plays with place labels over it, then the speaker shrinks to an inset over a dark map with English subtitles. This is the only reference with real speech and it sits outside the main silent pattern. Link https://x.com/ItsRealAlec/status/2114639649087934527/video/1
 
+## Extra reference supplied by the user on 30 October 2026
+
+- Freezers Turned Into Ovens, 10 seconds, outbreak spread. Two filled silhouette maps on a near black background, the United States large on the left and France inside a rounded inset frame on the right. Seven United States base icons start as teal freezers and flip one by one into red ovens with flames, expanding rings and heat glows while dashed contagion lines link them and a large red counter climbs from 0 to 7. A glowing arc then jumps from the Pentagon area across to the inset, the France dot field ignites from teal to orange in a spreading wave, its counter climbs to 350 plus and the inset border flips from teal to red. A light band sweeps the inset like a scanner. No voiceover, an electronic music bed carries it. Source file kept at workspace/user/media_library/video/97/ (user upload, 30 October 2026).
+
 ## Pattern across the set
 
 - Seven of the eight videos share one silent pattern. One claim, one dark map or chart, one hero number, labels in order, data that animates, and background music only.

@@ -18,6 +18,7 @@ Skill được đúc kết từ 8 video tham chiếu của @ItsRealAlec (ghi ch�
 | **Screen Grid** | Câu chuyện về cảnh báo hoặc phát sóng tới mọi người: mở bằng lưới màn hình phát sáng, xanh ngọc làm màu chủ đạo, chốt bằng bộ đếm độ phủ |
 | **Arc and Card** | Tiền hoặc hàng chỉ di chuyển giữa đúng hai nơi: một cung vàng duy nhất, phóng vào điểm đến và hạ một thẻ nắm giữ lớn tại đó |
 | **Speech Clip** | Một phát biểu thật là trung tâm: người nói trên nền bản đồ tối, phụ đề luôn hiện (chỉ dùng khi có clip được duyệt) |
+| **Outbreak Spread** | Một sự cố lan từ điểm này sang điểm khác: hai bản đồ bóng đổ (một chính, một trong khung lồng), biểu tượng lật trạng thái an toàn sang nguy hiểm lần lượt, đường lây đứt nét, một bộ đếm cho mỗi bản đồ, trường chấm bùng phát theo làn sóng |
 
 Có thêm một pha tuỳ chọn **Investigation** (phân tích nguyên nhân kiểu điều tra): bảng bằng chứng phủ lên biểu đồ đã làm mờ, các phát hiện hiện lần lượt theo dòng thời gian đánh số, mỗi phát hiện ghi rõ nguồn và đánh dấu “nghi vấn, chưa xác nhận” khi nguyên nhân chưa được khẳng định.
 
@@ -58,6 +59,10 @@ Có thêm một pha tuỳ chọn **Investigation** (phân tích nguyên nhân ki
 **Speech Clip** — clip phát biểu thật trên nền bản đồ, phụ đề hiệnตลอด (khung demo, không dùng hình người thật):
 
 ![Speech Clip](docs/styles/speech-clip.png)
+
+**Outbreak Spread** — sự cố lan truyền: hai bản đồ bóng đổ, biểu tượng lật trạng thái lần lượt, trường chấm bùng phát (khung thật từ bản dựng lại video tham chiếu “Freezers Turned Into Ovens”, số liệu lấy từ chính video tham chiếu để học kỹ thuật):
+
+![Outbreak Spread](docs/styles/outbreak-spread.png)
 
 Trừ Chart Duel và Investigation là khung thật từ video đã sản xuất, các ảnh còn lại dùng số liệu mẫu để minh họa phong cách (có gắn nhãn “Style demo · Sample data” ngay trong ảnh). Thư viện này sẽ được bổ sung thêm phong cách mới theo thời gian.
 

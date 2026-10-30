@@ -26,6 +26,8 @@
 
 - Use a real speech clip with a map behind it only when the user supplies or approves that exact clip and its subtitles.
 
+- Pick the outbreak spread when one failure or attack jumps from site to site, and fill two dark silhouette maps, the main map large and the second map inside a rounded inset frame, place state icons that start safe in teal and flip one by one into the danger state in red with a warning glyph, an expanding ring and a heat glow, connect the flipped points with dashed contagion lines, run one large counter per map that climbs as its points flip, fill the inset map with a field of small dots that ignite in a spreading wave after a glowing arc jumps from the finished first map into the inset, and flip the inset frame border from teal to red when the ignition starts.
+
 ## Verify and distill the data
 
 - Verify every number from its primary source before drawing anything and record the source beside each number in the working notes.
@@ -47,6 +49,8 @@
 - Use a deep navy background with slowly drifting aurora glows in violet, blue and teal plus fine star dots, added by decision of the user on 30 October 2026, and keep a dark vignette so text stays readable.
 
 - Keep the aurora saturation and the bar gradients vivid enough that the frame feels colourful at first glance, strengthened by decision of the user on 30 October 2026, and balance the extra brightness by dimming the chart behind any panel that opens over it.
+
+- For the outbreak spread, swap the dot map and aurora for filled silhouette maps on a near black background and let the safe and danger state colours carry the frame, because that template reads as an operations room rather than a data poster.
 
 - Use a bold sans serif in uppercase for titles, labels and numbers.
 
