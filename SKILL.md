@@ -28,6 +28,36 @@
 
 - Pick the outbreak spread when one failure or attack jumps from site to site, and fill two dark silhouette maps, the main map large and the second map inside a rounded inset frame, place state icons that start safe in teal and flip one by one into the danger state in red with a warning glyph, an expanding ring and a heat glow, connect the flipped points with dashed contagion lines, run one large counter per map that climbs as its points flip, fill the inset map with a field of small dots that ignite in a spreading wave after a glowing arc jumps from the finished first map into the inset, and flip the inset frame border from teal to red when the ignition starts.
 
+## Genre templates beyond the data set
+
+Researched on 30 October 2026 at the user request and written up in [the genre styles research](references/genre-styles-research.md). These widen the skill from data stories into storytelling, economics, news and horror while keeping the same verification and quality rules.
+
+- Pick the border flood when a story is territory changing over time, and let one map fill the frame while a colour floods across borders like liquid, a large year counter never leaves its corner and ticks faster in the violent years, and flags or icons pop in at capitals as they fall or rise.
+
+- Pick the chat thread when a story can be told as a conversation, and fill the frame with a faithful phone chat where bubbles pop in one at a time, typing dots hold the suspense before the important reply, timestamp jumps signal escalation, and the final bubble hangs alone on screen.
+
+- Pick the case file when a story is an investigation with evidence, and montage photos, clippings and map shots with a slow push in on every still, slam the key facts in as centre frame stamps, and run the four beats of hook, setup, climax and solved or unsolved status inside about sixty seconds.
+
+- Pick the bar race when the story is a ranking changing over time, and run five to ten bars with fixed colours that grow, shrink and swap places smoothly, make every overtake land as a plot twist with the date counter in its corner, and freeze on the final ranking as the payoff.
+
+- Pick the money river when the story is where money goes, and draw a flow diagram whose band widths equal the amounts, grow the bands one at a time in narration order, let the amounts travel along the bands as moving labels, and hold the full diagram at the end so it can be screenshotted.
+
+- Pick the rise and fall when the story is one company or empire across its life, and open on the fall as a hook before rewinding, climb a price or power line through labelled eras in the rise act, drop it off a cliff at the collapse beat, and land one money figure at each turning point.
+
+- Pick the paper collage when a news explainer should feel tactile, and stage it on aged newsprint where halftone photo cutouts with white keylines spring in with overshoot, one hot red is reserved for underlines and arrows, labels type on like pulled strips, and nothing ever fades because paper does not fade.
+
+- Pick the threshold tracker when a result is still undecided, and lock three layers in place, a region map that flips colour as results land, a seat or vote bar growing toward a fixed line marked with the number needed to win, and a gauge needle that jitters inside its uncertainty band before it settles on each batch update.
+
+- Pick the slider evidence when two images of the same place at two times carry the proof, and register them perfectly while a wipe line drags the after image across the before, footprint outlines fill with colour one by one as the count lands, and the dates and counts are stamped on the image itself over near silent sound.
+
+- Pick the analog horror when a fictional or clearly framed story should corrupt a trusted format, and build a low resolution fake broadcast with station cards and a schedule listing that holds one wrong entry, let signal decay be the only motion, and time the glitch bursts exactly to the scary lines over tape hiss and long near silence.
+
+- Pick the alert hijack when a warning story needs authority itself to break, and recreate an emergency alert screen faithfully with a scrolling crawl and escalating severity banners before a second unauthorised alert overrides the first with contradictory instructions, and frame the piece clearly as fiction or history so nobody mistakes it for a real alert.
+
+- Pick the ghost radio when a horror story is carried by voice and imagination, and hold one painterly night scene with drifting fog and rain while a single low slow narrator tells it, type the captions in slowly, place half a second of total silence before the scare line, change exactly one small thing in the image near the end, and cut to black with no explanation.
+
+- Pick the hundred candles, an original fusion of the kaidan candle ritual with the counter craft of this skill, when a story has many dark beats, and fill the frame with a grid of lit candles where one candle dies with a smoke wisp per beat, so the light itself is the progress bar and the frame is darkest exactly when the story is.
+
 ## Verify and distill the data
 
 - Verify every number from its primary source before drawing anything and record the source beside each number in the working notes.
