@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+examples/binance-hack/frames/
+examples/binance-hack/stills/
+examples/binance-hack/scene.html
+examples/binance-hack/fonts/
+*.wav
+*.mp4
+.DS_Store
