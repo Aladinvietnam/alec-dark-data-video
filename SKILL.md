@@ -96,6 +96,8 @@
 
 - Animate the data directly by counting numbers up or down, drawing routes, growing bars, dropping chart lines and revealing labels one by one.
 
+- Give every state change a visible cause that travels, added after the user asked where the shooting effects were on 30 October 2026: a bright pulse shoots along the link from the changed point to the next one just before it changes, a warning ring breathes around the next target, the change itself lands with a flash, a scale pop and a burst of sparks, and any jump between maps or panels is fired as a glowing comet with a fading trail that bursts on arrival, with a matching zap, shot and burst placed in the sound effects layer.
+
 - End a chart duel with a stamp, a verdict word or a multiple badge placed over the losing or sanctioned side.
 
 - End a count and board video on the full summary board and hold that board long enough to read.
