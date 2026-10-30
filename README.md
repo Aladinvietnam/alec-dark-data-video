@@ -1,6 +1,6 @@
 # Alec-Style Dark Data Video — Skill
 
-**Tác giả: Benjamin**
+**Tác giả: Aladinvietnam**
 
 Một **skill** (bộ hướng dẫn quy trình) giúp AI agent dựng các video dữ liệu ngắn kiểu @ItsRealAlec trên X: ngang 16:9, một video chỉ kể **một câu chuyện dữ liệu với một con số chính**, đồ hoạ nền tối rực rỡ, dữ liệu tự chuyển động trên màn hình, có giọng đọc và nhạc nền sáng tác riêng cho từng video.
 
