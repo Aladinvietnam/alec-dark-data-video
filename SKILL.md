@@ -66,6 +66,8 @@
 
 - Add a small flag chip only where place identity matters and keep every label clear of the hero number.
 
+- In a long form video, place generated illustration images inside framed panels beside the data plane, one panel per beat with a caption naming the place or subject, and mark every panel with a small illustration tag so an illustration is never presented as a real photo.
+
 ## Animate the data itself
 
 - Treat the named templates as a vocabulary of effects rather than fixed cages, because a real video usually combines several effects inside one story instead of using one effect alone.
@@ -108,9 +110,13 @@
 
 - Compose an attractive background track for each video with a chord progression, a pulsing bass and kick, and an arpeggio that enters with the data phase, and place a riser and an impact hit exactly on the verdict moment.
 
+- Build a separate sound effects layer and mix it under the music and voice, with a whoosh on each camera move, short ticks while a hero number counts, confirmation beeps when a target locks, a soft pop when a card or panel lands, and a riser plus impact on the closing board.
+
 - Keep the music low under the voice and let the voice carry the timing of every reveal.
 
 - Target 8 to 28 seconds for a pure data clip, allow up to about 36 seconds when narration and an investigation phase are added, and give each label at least 1.5 seconds on screen.
+
+- When the user asks for a long form episode, run about sixty to ninety seconds, open with a hook beat that states the scariest verified number over a target lock before the journey starts, then follow the journey beat by beat and close on the summary board, keeping every number sourced the same way as a short clip.
 
 - Give the hero number the largest size and the longest hold of any element in the video.
 
