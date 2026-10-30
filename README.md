@@ -77,6 +77,7 @@ SKILL.md                              # Tài liệu skill đầy đủ (quy trì
 skill.yaml                            # Khai báo để agent nhận diện và nạp skill
 references/alec-reference-videos.md   # Ghi chú 8 video tham chiếu kèm link gốc
 examples/binance-hack/                # Ví dụ hoàn chỉnh: vụ hack Binance 29/10/2026
+examples/chip-route-long/             # Ví dụ bản dài 68 giây: The Chip Route (hook + panel ảnh + SFX)
 ```
 
 ## Cách dùng
@@ -88,6 +89,8 @@ examples/binance-hack/                # Ví dụ hoàn chỉnh: vụ hack Binanc
 ## Ví dụ
 
 Thư mục [examples/binance-hack](examples/binance-hack/) chứa toàn bộ mã nguồn của một video thật đã sản xuất theo skill này (mẫu Chart Duel + pha Investigation): kịch bản cảnh, mã chụp khung hình, mã sinh nhạc nền, mã sinh giọng đọc và file ghi nguồn số liệu. Xem hướng dẫn chạy trong [examples/binance-hack/README.md](examples/binance-hack/README.md).
+
+Thư mục [examples/chip-route-long](examples/chip-route-long/) chứa mã nguồn của video bản dài 68 giây “The Chip Route”: mở bằng hook khoá mục tiêu, 4 panel ảnh minh họa, bảng bằng chứng và lớp hiệu ứng âm thanh riêng, toàn bộ số liệu thật đã kiểm chứng. Xem [examples/chip-route-long/README.md](examples/chip-route-long/README.md).
 
 ## Giấy phép
 
