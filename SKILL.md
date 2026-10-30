@@ -68,6 +68,12 @@
 
 ## Animate the data itself
 
+- Treat the named templates as a vocabulary of effects rather than fixed cages, because a real video usually combines several effects inside one story instead of using one effect alone.
+
+- Write the script first, then map each beat of the script to the effect that serves it, such as a route reveal for the journey, a target lock for the risk beat, an evidence panel for the cause and a summary board for the close, so effects follow the narration and build attention beat by beat.
+
+- Keep one visual plane and one continuous camera while the effects change, and let each effect land its payoff before the next one starts, so a mixed video still feels like one film.
+
 - Move the camera with one slow pan or one slow zoom across the map or chart and let that movement reveal the stops in order.
 
 - Open a warning story with a clear alert effect, such as a pulsing symbol with expanding rings and a breathing red border, and remove it before the data phase starts.
