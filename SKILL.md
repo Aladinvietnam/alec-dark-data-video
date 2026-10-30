@@ -60,6 +60,8 @@
 
 - Give the main bars a soft glow in their own colour so the colour coding stays readable against the dark background.
 
+- Keep every active marker alive after its reveal with small continuous motion, such as rising ember particles, heat shimmer lines, a flickering flame glyph, pulsing glows and a sweeping scan band inside inset panels, and give the hero number and the title word a soft bloom in their own colour, because a frame where nothing moves between reveals reads as flat next to the references, as the user pointed out on 30 October 2026.
+
 - Keep the title fixed at the top and keep any counter fixed in one corner so the viewer always knows the claim and the progress.
 
 - Lay the canvas out on fixed zones for the header, the hero number, the chart, the subtitle line, the verdict row and the closing cards, and keep each element inside its own zone.
